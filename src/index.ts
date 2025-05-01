@@ -1,5 +1,5 @@
 
-import { transformAsync, BabelFileResult } from '@babel/core';
+import { transformAsync, PluginItem } from '@babel/core';
 import velto from '@velto/babel-plugin-velto';
 import { Plugin, PluginOption } from 'vite';
 
@@ -14,17 +14,25 @@ export default function vitePluginLite(options?: PluginOption): Plugin {
     },
 
     async transform(source, id) {
-      if (!(/\.ts[x]?$/i.test(id))) {
+      if (!(/\.[jt]sx$/i.test(id))) {
         return null;
       }
+      const filepath = id.replace(/\?.+$/, '');
 
-      id = id.replace(/\?.+$/, '');
+      const plugins: PluginItem[] = [velto];
+
+      if (id.endsWith('.tsx') || filepath.endsWith('.tsx')) {
+        plugins.push([
+          '@babel/plugin-transform-typescript',
+          { isTSX: true, allowExtensions: true },
+        ])
+      }
 
       const result = await transformAsync(source, {
-        filename: id,
-        sourceFileName: id,
+        filename: filepath,
+        sourceFileName: filepath,
         presets: [],
-        plugins: [velto, ['@babel/plugin-transform-typescript', { isTSX: true, allowExtensions: true }]],
+        plugins,
         sourceMaps: needSourceMap,
       });
 

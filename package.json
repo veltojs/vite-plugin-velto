@@ -12,7 +12,8 @@
   "keywords": [
     "velto",
     "vite",
-    "plugin"
+    "plugin",
+    "vite-plugin-velto"
   ],
   "author": "Zebing Fu",
   "license": "MIT",

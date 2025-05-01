@@ -1,0 +1,29 @@
+{
+  "name": "vite-plugin-velto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc --watch --declaration",
+    "build": "pnpm clean && tsc --build --declaration",
+    "release": "pnpm run build && pnpm publish",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "velto",
+    "vite",
+    "plugin"
+  ],
+  "author": "Zebing Fu",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/plugin-transform-typescript": "^7.27.1",
+    "@velto/babel-plugin-velto": "1.0.0-beta.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.4"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.20.5"
+  }
+}
